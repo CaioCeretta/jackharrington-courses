@@ -1,0 +1,13 @@
+{
+  "compilerOptions": { 
+    "target": "ESNext",          
+    "jsx": "react",                 
+    "module": "commonjs",
+    "lib": [ "ES2016", "DOM"],
+    "esModuleInterop": true,        
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,                    
+     "skipDefaultLibCheck": true,
+    "skipLibCheck": true  
+  }
+}
