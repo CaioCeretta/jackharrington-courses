@@ -63,7 +63,9 @@ function Timer() {
   );
 }
 
+let appRender = 0;
 export default function UseEffectMistakes2() {
+  console.log(`appRender = ${appRender++}`)
   const [index, setIndex] = useState(0);
 
 

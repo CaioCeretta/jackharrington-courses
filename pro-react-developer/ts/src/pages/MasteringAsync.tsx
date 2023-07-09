@@ -1,31 +1,36 @@
 // import fetch from 'node-fetch'
-import { Pokemon, PokemonList } from "../getPokemon";
+import PromisePool from "@supercharge/promise-pool";
+import { useEffect, useState } from "react";
+import { getPokemon, getPokemonList, Pokemon, PokemonList } from "../getPokemon";
 
-const getPokemonList = async (): Promise<PokemonList> => {
-  const listResponse = await fetch("https://pokeapi.co/api/v2/pokemon/");
- return await listResponse.json();
-}
 
-const getPokemon(url: string): Promise<Pokemon> {
-  
-}
-
-(async function () {
-  try {
-  const list = await getPokemonList()
-  const dataResponse = await fetch(list.results[0].url);
-  const data: Pokemon = await dataResponse.json();
-
-  console.log(data.stats);
-  } catch(e) {
-    console.log(e)
-  }
-})();
 
 export default function MasteringAsync() {
+
+  const [pokemon, setPokemon] = useState<Pokemon[]>([])
+  useEffect(() => {
+    async function getData() {
+      const list = await getPokemonList();
+
+      const { results } = await PromisePool
+        .withConcurrency(10)
+        .for(list.results)
+        .process(async data => {
+          return await getPokemon(data.url)
+        })
+
+        setPokemon(results);
+    }
+    getData();
+  }, [])
+
   return (
-    <div>
-      <span>asdas</span>
+    <div className="App">
+      <ul >
+      {pokemon.map(poke => {
+        return <li key={poke.id}>{poke.name}</li>  
+      })}
+      </ul>
     </div>
   );
 }

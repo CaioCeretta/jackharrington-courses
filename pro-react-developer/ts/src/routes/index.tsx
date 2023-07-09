@@ -6,6 +6,7 @@ import UseEffectMistakes2 from '../pages/UseEffectMistakes-2'
 import TamingUseEffect from '../pages/tamingUseEffect'
 import MasteringMemo from '../pages/MasteringMemo'
 import MasteringAsync from '../pages/MasteringAsync'
+import DoingHooksWrong from '../pages/DoingHooksWrong'
 
 
 const AppRouter = () => {
@@ -19,6 +20,7 @@ const AppRouter = () => {
         <Route path="/useEffectCommonMistakes2" element={<UseEffectMistakes2 />}/>
         <Route path="/masteringMemo" element={<MasteringMemo />}/>
         <Route path="/masteringAsync" element={<MasteringAsync />}/>
+        <Route path="/doingHooksWrong" element={<DoingHooksWrong />}/>
       </Routes>
     </BrowserRouter>
   )
